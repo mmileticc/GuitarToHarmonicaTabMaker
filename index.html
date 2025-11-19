@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GtoH</title>
+    <link rel="icon" type="image/x-icon" href="/img/tabicon.webp">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+    <script src="main.js" defer></script>
+    
+</head>
+<body class="container">
+    <div id="main" class="">
+        <div class="row">
+             <div class="col">
+                <span>Preference notnog zapisa:</span>
+                <label for="sharp">Sharp (#)</label>
+                <input type="radio" id="sharp" name="sharpflat" value="sharp" checked>
+                |
+                <label for="flat">Flat (b)</label>
+                <input type="radio" id="flat" name="sharpflat" value="flat">
+            </div>
+            <div class="col">
+                <form id="fretForm">
+                    <label for="numOfFrets">Choose a number of frets of guitar:</label>
+                    <input type="number" name="numOfFrets" id="numOfFrets" min="12" max="30" required>
+                    <input type="submit" name="fretButton" id="fretButton">
+                </form>
+            </div>
+        </div>
+       
+        
+        <h2>Fretboard</h2>
+        <div id="fretboard" class="row overflow-auto">
+        </div>
+
+        <div id="testMess" class="grid-tablee">
+        </div>
+        
+        <h2>GuitarTabs</h2>
+        <div id="guitarTabs" class="row">
+            
+        </div>
+        <h2>HarmonicaTabs</h2>
+        <div id="harmonicaTabs" class="row">
+            
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+.klasa{
+    color: blue;
+}
+.klasa2{
+    background-color: blue;
+}
+
+tr td{
+    border: solid black 2px;
+    text-align: center;
+    width: 30px;
+}
+tr td{
+    border: solid black 2px;
+    text-align: center;
+    width: 30px;
+}
+
+.fretField{
+    background-color: rgb(172, 119, 88);
+    color: whitesmoke;
+
+}
+.fretField:hover{
+    background-color: rgb(230, 176, 144);
+    color: black;
+/* font-weight: bold; */
+}
+
+.tdNoBorder{
+    border: none;
+}
+
+
+.boldNumeration{
+    font-weight: bold;
+    border-top: solid black 3px;
+}
+
+
+.zeroFret{
+    border-right: solid black 10px;
+}
+
+
+.grid-tablee {
+    height: 300px;           /* fiksna visina */
+    overflow-y: auto;        /* vertikalni skrol */
+    overflow-x: hidden;      /* ili auto ako ti treba horizontalni */
+    border: 1px solid #ccc;  /* opcionalno, za vizuelni okvir */
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 kolona */
+    gap: 4px; /* razmak izmedju celija */
+}
+
+.fret-cell {
+  padding: 8px;
+  /* background-color: #eee; */
+  border: 1px solid #ccc;
+  text-align: center;
+  height: min-content;
+}
