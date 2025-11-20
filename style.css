@@ -1,9 +1,3 @@
-.klasa{
-    color: blue;
-}
-.klasa2{
-    background-color: blue;
-}
 
 tr td{
     border: solid black 2px;
@@ -43,6 +37,12 @@ tr td{
 }
 
 
+.guitarTabFont {
+  font-family: monospace;
+  white-space: pre; /* očuva razmake i prelome linija */
+}
+
+/*\/ test message div css//////////////////////////////////////////////// */
 .grid-tablee {
     height: 300px;           /* fiksna visina */
     overflow-y: auto;        /* vertikalni skrol */
@@ -53,10 +53,13 @@ tr td{
     gap: 4px; /* razmak izmedju celija */
 }
 
-.fret-cell {
+.cell {
   padding: 8px;
   /* background-color: #eee; */
   border: 1px solid #ccc;
   text-align: center;
   height: min-content;
 }
+
+
+/*/\ test message div css//////////////////////////////////////////////// */

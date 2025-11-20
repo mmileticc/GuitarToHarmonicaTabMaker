@@ -1,10 +1,9 @@
 const sharpFlatChoice = document.querySelectorAll('input[name="sharpflat"]');
 const form = document.getElementById('fretForm');
 
-
-const fret = document.getElementById("fretboard");
-const guitarTabs = document.getElementById("guitarTabs");
-const harmonicaTabs = document.getElementById("harmonicaTabs");
+const fretboardDiv = document.getElementById("fretboard");
+const guitarTabsDiv = document.getElementById("guitarTabs");
+const harmonicaTabsDiv = document.getElementById("harmonicaTabs");
 
 let numOfFrets = 18;
 const notesSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -12,15 +11,31 @@ const notesFlat =  ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 
 let notes = notesSharp;
 let isSharp = true;
 const numOfNotes = notes.length;
-let tuning = ['E2', 'A2', 'D3', 'G3', 'B3', 'E4'];
+const standardTuning = [  'E4',
+                'B3',
+                'G3',
+                'D3',
+                'A2',
+                'E2'];
+
+let tuning = standardTuning;
 
 
+let guitarTabs = []
+
+
+//production testing necessities
+const mess = document.getElementById("testMess");
+
+ //////////////////////////////  /\ declarations /\  /////////////////////////////////////////
 
 //testing deo kodaaa //////////////////////////////////
 let index = findNotesIndex('Gb');
 
-fret.append(index);
-refreshFret();
+fretboardDiv.append(index);
+refreshNeck();
+clearGuitarTabs();
+refreshGuitarTabs();
 ///////////////////////////////////////////////////////
 
 
@@ -41,18 +56,18 @@ function changeToSharpOrFlat(SorF){
         isSharp = false;
         notes = notesFlat;
     }
-    refreshFret();
+    refreshNeck();
 }
 
 
-function refreshFret(){
-    fret.innerHTML = '';
+function refreshNeck(){
+    fretboardDiv.innerHTML = '';
     var table = document.createElement('table');
     //let stringNumber = 1;
 
-    //sve zice
-    tuning.slice().reverse().forEach((noteFull, stringIndex)=>{
-        const stringNumber = stringIndex + 1;
+    //printing all strings
+    tuning.slice().forEach((noteFull, stringIndex)=>{
+        const stringNumber = stringIndex; // + 1 optional, for now let it be for testing purpose it is prittier
         const octave = parseInt(noteFull.slice(-1), 10);
         const noteName = noteFull.slice(0, -1);
         const rootNoteIndex = findNotesIndex(noteName); 
@@ -85,7 +100,7 @@ function refreshFret(){
         //stringNumber++;
     });
 
-    //numeracije polja ispod vrata 
+    //pritning numerations under the guitar neck (fretboard)
     var numeration = document.createElement('tr');
     for(var i = 0; i <  numOfFrets + 1; i++){
         var num = document.createElement('td');
@@ -98,29 +113,119 @@ function refreshFret(){
     }
     table.append(numeration);
 
-    fret.append(table);
+    fretboardDiv.append(table);
     
 }
-const mess = document.getElementById("testMess");
+
+let pressedNotes = []
+
 function noteClickHandler(string, fret){
-    // console.log("zica ", string, ' prag ', fret);
-    // mess.append("zica ", string, ' prag ', fret);
-    // mess.append(document.createElement("br"));
+    
+    // const cell = document.createElement('div');
+    // cell.textContent = 'zica' + string + ' prag '+ fret;
+    // cell.classList.add('cell');
+    // pressedNotes.push(cell);
 
-    // mess.hidden = false;
+    addNoteToGuitarTab(string, fret);
+    refreshGuitarTabs();
 
-    const cell = document.createElement('div');
-    cell.textContent = 'zica' + string + ' prag '+ fret;
-    cell.classList.add('fret-cell');
-    mess.appendChild(cell);
+    //mess.appendChild(cell);
+    // drawNotes();
 
 }
+// function drawNotes(){
+//     mess.innerHTML = '';
+//     pressedNotes.forEach(element => {
+//         mess.append(element);
+//     });
+// }
 
 function changeNumOfFrets(newNum){
     numOfFrets = parseInt(newNum);
-    refreshFret();
+    refreshNeck();
 }
- //listeneri//////////////////////////////////////////////////////////////////
+
+
+
+function clearGuitarTabs(){
+    guitarTabs =  [' ',' ',' ',' ',' ',' '];//tuning.map(note => note + ' |');
+
+    refreshGuitarTabs();
+}
+function addNoteToGuitarTab(stringNumber, fretNumber){
+
+
+    for(var i = 0; i < guitarTabs.length; i++){
+        if(i == stringNumber){
+            const padded = fretNumber.toString().padStart(2, '-');
+            guitarTabs[i] += padded;
+
+        }else{
+             guitarTabs[i] += '--';
+        }
+        guitarTabs[i] += '-';
+    }
+}
+
+
+
+
+////////////////////////////////////////// first version of guitar tabs, it is not modular
+function splitTabsIntoLines(tabLines, maxWidth = 60) {
+  const splitLines = [];
+
+  // za svaku zicu
+  for (let i = 0; i < tabLines.length; i++) {
+    const line = tabLines[i];
+    const chunks = [];
+
+    for (let j = 0; j < line.length; j += maxWidth) {
+      chunks.push(line.slice(j, j + maxWidth));
+    }
+
+    splitLines.push(chunks);
+  }
+
+  return splitLines;
+}
+
+function refreshGuitarTabs() {
+    guitarTabsDiv.innerHTML = '';
+
+    
+    const maxChars = Math.floor((guitarTabsDiv.getBoundingClientRect().width - 20) / 8);
+    const split = splitTabsIntoLines(guitarTabs, maxChars);
+
+    const numRows = split[0].length; // broj redova po zici
+    const openLabels = getOpenStringLabels();
+
+    for (let row = 0; row < numRows; row++) {
+        for (let string = 0; string < split.length; string++) {
+            const line = document.createElement('pre');
+            line.classList.add('guitar-tab-output');
+
+            const label = openLabels[string];
+            const tabContent = split[string][row] || '';
+            line.textContent = label + tabContent;
+
+            guitarTabsDiv.append(line);
+        }
+
+        // razmak izmedju grupa
+        const spacer = document.createElement('div');
+        spacer.style.height = '10px';
+        spacer.style.backgroundColor = 'beige';
+
+        guitarTabsDiv.append(spacer);
+    }
+}
+
+function getOpenStringLabels() {
+  return tuning.map(note => note.padEnd(4, ' ') + '|'); // npr. 'E2  ', 'A2  ', ...
+}
+
+////////////  \/ listeneri \/ //////////////////////////////////
+
 sharpFlatChoice.forEach(radio => {
     radio.addEventListener('change', (event) => {
         if (event.target.checked) {
@@ -137,4 +242,9 @@ form.addEventListener('submit', (event) => {
     const num = form.elements.numOfFrets.value;
     console.log('Izabrano:', num, ' fretova');
     changeNumOfFrets(num);
+});
+
+
+window.addEventListener('resize', () => {
+  refreshGuitarTabs(); // koristi novu sirinu
 });
