@@ -215,7 +215,7 @@ function refreshGuitarTabs() {
     guitarTabsDiv.innerHTML = '';
 
     
-    const maxChars = Math.floor((guitarTabsDiv.getBoundingClientRect().width - 40) / 8);
+    const maxChars = Math.max(20, Math.floor((guitarTabsDiv.getBoundingClientRect().width - 40) / 8));
     const split = splitTabsIntoLines(guitarTabs, maxChars);
 
     const numRows = split[0].length; // broj redova po zici

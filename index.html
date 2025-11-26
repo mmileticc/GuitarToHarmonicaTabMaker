@@ -30,7 +30,7 @@
             <div class="col">
                 <form id="fretForm">
                     <label for="numOfFrets"><strong>Izaberite broj polja gitare:</strong></label>
-                    <input type="number" name="numOfFrets" id="numOfFrets" min="12" max="30" required>
+                    <input type="number" name="numOfFrets" id="numOfFrets" min="12" max="30" required  value="18">
                     <input type="submit" name="fretButton" id="fretButton" value="Primeni">
                 </form>
             </div>
@@ -39,20 +39,23 @@
             <div id="harmonica-key-picker" class="col">
             <label for="harmonicaKey"><strong>Tonalitet harmonike:</strong></label>
             <select id="harmonicaKey">
-                <!-- Najčešći početnički ključevi; C je podrazumevano izabran -->
-                <option value="G">G</option>
-                <option value="A">A</option>
-                <option value="C" selected>C</option>
-                <option value="D">D</option>
-                <option value="F">F</option>
-                <!-- <option value="Bb">Bb</option> -->
-                <!-- proširiti po potrebi:
-                <option value="Eb">Eb</option>
-                <option value="E">E</option>
-                <option value="B">B</option>
-                <option value="F#">F#</option>
-                <option value="Ab">Ab</option>
-                -->
+                <optgroup label="Najčešći">
+                    <option value="C" selected>C</option>
+                    <option value="G">G</option>
+                    <option value="A">A</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                </optgroup>
+                <optgroup label="Ostali">
+                    <option value="Ab">Ab</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                    <option value="Db">Db</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F#">F#</option>
+                </optgroup>
+
             </select>
             </div>
 

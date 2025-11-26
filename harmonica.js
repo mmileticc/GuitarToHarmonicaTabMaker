@@ -14,32 +14,36 @@ const SEMITONE_TO_NOTE = [
   "C", "C#", "D", "D#", "E", "F",
   "F#", "G", "G#", "A", "A#", "B"
 ];
-const ROOT_MIDI = {
-    "G": 43,  // G2
-    "A": 45,  // A2
-    "C": 48,  // C3 
-    "D": 50,  // D3
-    "F": 53,   // F3
+// const ROOT_MIDI = {
+//     "G": 43,  // G2
+//     "A": 45,  // A2
+//     "C": 48,  // C3 
+//     "D": 50,  // D3
+//     "F": 53,   // F3
     
-    /*"G": 43,   // G2
-    "A": 45,   // A2
-    "Bb": 46,  // Bb2
-    "B": 47,   // B2
-    "C": 48,   // C3
-    "Db": 49,  // Db3
-    "D": 50,   // D3
-    "Eb": 51,  // Eb3
-    "E": 52,   // E3
-    "F": 53,   // F3
-    "F#": 54,  // F#3
-    "Ab": 56   // Ab3*/
+//     /*"G": 43,   // G2
+//     "A": 45,   // A2
+//     "Bb": 46,  // Bb2
+//     "B": 47,   // B2
+//     "C": 48,   // C3
+//     "Db": 49,  // Db3
+//     "D": 50,   // D3
+//     "Eb": 51,  // Eb3
+//     "E": 52,   // E3
+//     "F": 53,   // F3
+//     "F#": 54,  // F#3
+//     "Ab": 56   // Ab3*/
 
+// };
+const ROOT_MIDI = {
+  "G": 43, "Ab": 44, "A": 45, "Bb": 46, "B": 47,
+  "C": 48, "Db": 49, "D": 50, "Eb": 51, "E": 52,
+  "F": 53, "F#": 54
 };
 
 export class DiatonicHarmonica {
   constructor(key = "C") {
     this.key = key;
-    this.root = NOTE_TO_SEMITONE[key];
     this.rootMidi = ROOT_MIDI[key];
 
 
@@ -118,7 +122,6 @@ export class DiatonicHarmonica {
     /** Menja tonalitet (npr "G") i automatski transponuje note */
     setKey(newKey) {
         this.key = newKey;
-        this.root = NOTE_TO_SEMITONE[newKey];
         this.rootMidi = ROOT_MIDI[newKey];
 
     }

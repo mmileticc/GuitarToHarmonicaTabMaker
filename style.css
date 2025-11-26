@@ -2,23 +2,18 @@
 tr td{
     border: solid black 2px;
     text-align: center;
-    width: 30px;
-}
-tr td{
-    border: solid black 2px;
-    text-align: center;
-    width: 30px;
+    width: 35px;
 }
 
 .fretField{
-    background-color: rgb(172, 119, 88);
+    background-color: rgb(67, 61, 28);
     color: whitesmoke;
 
 }
 .fretField:hover{
-    background-color: rgb(230, 176, 144);
-    color: black;
-/* font-weight: bold; */
+    background-color: rgb(95, 86, 36);
+    color: white;
+    font-weight: bold;
 }
 
 .tdNoBorder{
@@ -43,5 +38,18 @@ tr td{
 }
 
 .disabledNote{
-    background-color: gray;
+    background-color: rgb(148, 141, 101);
 }
+
+
+/* copilot dolje */
+#harmonicaKey optgroup[label="Najčešći"] {
+    font-weight: bold;
+    color: black; 
+}
+
+#harmonicaKey optgroup[label="Ostali"] {
+    font-style: italic;
+    padding: 20px;
+}
+
