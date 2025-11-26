@@ -1,9 +1,16 @@
+import { DiatonicHarmonica } from './harmonica.js';
+
 const sharpFlatChoice = document.querySelectorAll('input[name="sharpflat"]');
 const form = document.getElementById('fretForm');
 
 const fretboardDiv = document.getElementById("fretboard");
 const guitarTabsDiv = document.getElementById("guitarTabs");
 const harmonicaTabsDiv = document.getElementById("harmonicaTabs");
+
+// Podrazumevano: C harmonika
+const harp = new DiatonicHarmonica('C');
+const keySelect = document.getElementById('harmonicaKey');
+
 
 let numOfFrets = 18;
 const notesSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -24,9 +31,6 @@ let tuning = standardTuning;
 let guitarTabs = []
 
 
-//production testing necessities
-const mess = document.getElementById("testMess");
-
  //////////////////////////////  /\ declarations /\  /////////////////////////////////////////
 
 //testing deo kodaaa //////////////////////////////////
@@ -36,6 +40,11 @@ fretboardDiv.append(index);
 refreshNeck();
 clearGuitarTabs();
 refreshGuitarTabs();
+// const harp = new DiatonicHarmonica("C");
+console.log(harp.getPlayableNotes());
+
+
+
 ///////////////////////////////////////////////////////
 
 
@@ -63,11 +72,11 @@ function changeToSharpOrFlat(SorF){
 function refreshNeck(){
     fretboardDiv.innerHTML = '';
     var table = document.createElement('table');
-    //let stringNumber = 1;
+    const notesHarmonica = harp.getPlayableNotes();
 
     //printing all strings
     tuning.slice().forEach((noteFull, stringIndex)=>{
-        const stringNumber = stringIndex; // + 1 optional, for now let it be for testing purpose it is prittier
+        const stringNumber = stringIndex; 
         const octave = parseInt(noteFull.slice(-1), 10);
         const noteName = noteFull.slice(0, -1);
         const rootNoteIndex = findNotesIndex(noteName); 
@@ -85,19 +94,28 @@ function refreshNeck(){
             myIndex %= numOfNotes;
 
             var myOctave = octave + octaveDif; 
-            note.textContent = notes[myIndex] + myOctave;
-            // note.setAttribute("string", stringNumber);
-            // note.setAttribute("fretNumber", i);
 
-            note.addEventListener('click', () => {
-                noteClickHandler(stringNumber, i);
-            });
-
+            let fullNote = notes[myIndex] + myOctave;
+            let searchNoteName = fullNote;                                //
+            if(!isSharp) searchNoteName = notesSharp[myIndex] + myOctave; //potrebno kad su preference zapisa u b notaciji a harmonica vraca samo note u # notaciji
+            
+            note.textContent = fullNote;
+            
+            const result = notesHarmonica.find(entry => entry.note === searchNoteName);
+            
+            if(result){
+                note.addEventListener('click', () => {
+                    noteClickHandler(stringNumber, i, searchNoteName);
+                });
+            }else{
+                note.classList.add("disabledNote");
+                note.classList.remove("fretField");
+            }
+            
             string.append(note);
         }
         table.append(string);
 
-        //stringNumber++;
     });
 
     //pritning numerations under the guitar neck (fretboard)
@@ -119,26 +137,30 @@ function refreshNeck(){
 
 let pressedNotes = []
 
-function noteClickHandler(string, fret){
-    
-    // const cell = document.createElement('div');
-    // cell.textContent = 'zica' + string + ' prag '+ fret;
-    // cell.classList.add('cell');
-    // pressedNotes.push(cell);
-
+function noteClickHandler(string, fret, note){
+    pressedNotes.push({string, fret, note});
+    //console.log(pressedNotes);
     addNoteToGuitarTab(string, fret);
     refreshGuitarTabs();
+    refreshHarmonicaTabs();
 
-    //mess.appendChild(cell);
-    // drawNotes();
-
+    
 }
-// function drawNotes(){
-//     mess.innerHTML = '';
-//     pressedNotes.forEach(element => {
-//         mess.append(element);
-//     });
-// }
+
+function refreshHarmonicaTabs(){
+    harmonicaTabsDiv.innerHTML = '';
+    const harmonicaNotes = harp.getPlayableNotes();
+    pressedNotes.forEach(element => {
+        let note = element.note;
+        let obj = harmonicaNotes.findLast(n => n.note == note);
+        if(obj){
+           // harmonicaTabsDiv.append(" ");
+            harmonicaTabsDiv.append(obj.tab.toString().padStart(3, '_'));
+            //harmonicaTabsDiv.append(" | ");
+        }
+    });
+}
+
 
 function changeNumOfFrets(newNum){
     numOfFrets = parseInt(newNum);
@@ -193,7 +215,7 @@ function refreshGuitarTabs() {
     guitarTabsDiv.innerHTML = '';
 
     
-    const maxChars = Math.floor((guitarTabsDiv.getBoundingClientRect().width - 20) / 8);
+    const maxChars = Math.floor((guitarTabsDiv.getBoundingClientRect().width - 40) / 8);
     const split = splitTabsIntoLines(guitarTabs, maxChars);
 
     const numRows = split[0].length; // broj redova po zici
@@ -248,3 +270,16 @@ form.addEventListener('submit', (event) => {
 window.addEventListener('resize', () => {
   refreshGuitarTabs(); // koristi novu sirinu
 });
+
+keySelect.addEventListener('change', () => {
+    const newKey = keySelect.value;
+    harp.setKey(newKey);
+
+    //osvezivanje komponenti na koje moze imati uticaj promena tonaliteta
+    refreshNeck();
+    refreshGuitarTabs();
+    refreshHarmonicaTabs();
+
+    const playable = harp.getPlayableNotes();
+    console.log('Harmonica key:', newKey, playable);
+  });

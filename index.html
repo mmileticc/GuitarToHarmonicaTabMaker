@@ -13,14 +13,14 @@
 
     <!-- scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
-    <script src="main.js" defer></script>
+    <script type="module" src="main.js" defer></script>
     
 </head>
 <body class="container">
     <div id="main" class="">
         <div class="row my-3">
              <div class="col">
-                <span>Preference notnog zapisa:</span>
+                <span><strong>Preference notnog zapisa:</strong></span>
                 <label for="sharp">Sharp (#)</label>
                 <input type="radio" id="sharp" name="sharpflat" value="sharp" checked>
                 |
@@ -29,11 +29,33 @@
             </div>
             <div class="col">
                 <form id="fretForm">
-                    <label for="numOfFrets">Choose a number of frets of guitar:</label>
+                    <label for="numOfFrets"><strong>Izaberite broj polja gitare:</strong></label>
                     <input type="number" name="numOfFrets" id="numOfFrets" min="12" max="30" required>
-                    <input type="submit" name="fretButton" id="fretButton">
+                    <input type="submit" name="fretButton" id="fretButton" value="Primeni">
                 </form>
             </div>
+
+            <!-- Harmonika: izbor tonaliteta -->
+            <div id="harmonica-key-picker" class="col">
+            <label for="harmonicaKey"><strong>Tonalitet harmonike:</strong></label>
+            <select id="harmonicaKey">
+                <!-- Najčešći početnički ključevi; C je podrazumevano izabran -->
+                <option value="G">G</option>
+                <option value="A">A</option>
+                <option value="C" selected>C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+                <!-- <option value="Bb">Bb</option> -->
+                <!-- proširiti po potrebi:
+                <option value="Eb">Eb</option>
+                <option value="E">E</option>
+                <option value="B">B</option>
+                <option value="F#">F#</option>
+                <option value="Ab">Ab</option>
+                -->
+            </select>
+            </div>
+
         </div>
        
         
@@ -41,18 +63,22 @@
         <div id="fretboard" class="row overflow-auto">
         </div>
 
-        
-        
-        <h2>GuitarTabs</h2>
-        <div id="guitarTabs" class="row">
-            
-        </div>
-        <h2>HarmonicaTabs</h2>
-        <div id="harmonicaTabs" class="row">
-        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>GuitarTabs</h2>
+                <div id="guitarTabs" class="row m-3"></div>
+            </div>
 
-        <div id="testMess" class="grid-tablee" hidden>
+            <div class="col-lg-4">
+                <h2>HarmonicaTabs</h2>
+                <div id="harmonicaTabs" class="row m-3"></div>
+            </div>
+
+        
         </div>
+        
+
+        
 
     </div>
 </body>

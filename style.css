@@ -39,27 +39,9 @@ tr td{
 
 .guitarTabFont {
   font-family: monospace;
-  white-space: pre; /* očuva razmake i prelome linija */
+  white-space: pre; 
 }
 
-/*\/ test message div css//////////////////////////////////////////////// */
-.grid-tablee {
-    height: 300px;           /* fiksna visina */
-    overflow-y: auto;        /* vertikalni skrol */
-    overflow-x: hidden;      /* ili auto ako ti treba horizontalni */
-    border: 1px solid #ccc;  /* opcionalno, za vizuelni okvir */
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 kolona */
-    gap: 4px; /* razmak izmedju celija */
+.disabledNote{
+    background-color: gray;
 }
-
-.cell {
-  padding: 8px;
-  /* background-color: #eee; */
-  border: 1px solid #ccc;
-  text-align: center;
-  height: min-content;
-}
-
-
-/*/\ test message div css//////////////////////////////////////////////// */
