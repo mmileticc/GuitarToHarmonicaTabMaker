@@ -1,79 +1,3 @@
-/* 
-tr td{
-    border: solid black 2px;
-    text-align: center;
-    width: 35px;
-}
-
-.fretField{
-    background-color: rgb(67, 61, 28);
-    color: whitesmoke;
-
-}
-.fretField:hover{
-    background-color: rgb(95, 86, 36);
-    color: white;
-    font-weight: bold;
-}
-
-.tdNoBorder{
-    border: none;
-}
-
-
-.boldNumeration{
-    font-weight: bold;
-    border-top: solid black 3px;
-}
-
-
-.zeroFret{
-    border-right: solid black 10px;
-}
-
-
-.guitarTabFont {
-  font-family: monospace;
-  white-space: pre; 
-}
-
-.disabledNote{
-    background-color: rgb(148, 141, 101);
-}
-
-
-/* copilot dolje 
-#harmonicaKey optgroup[label="Najčešći"] {
-    font-weight: bold;
-    color: black; 
-}
-
-#harmonicaKey optgroup[label="Ostali"] {
-    font-style: italic;
-    padding: 20px;
-}
-
-.tab-note.selected {
-  background-color: yellow;
-  border: 1px solid red;
-}
-
- 
-#harmonicaTabs {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
-  gap: 8px;
-  font-family: monospace;
-}
-#harmonicaTabs span { 
-    display: inline; 
-}
-
- */
-
-/* ////////////////////////////////// ///////////////////////////////// */
-
-
 
 /* Globalni stil */
 body {
@@ -102,7 +26,8 @@ table {
 tr td {
   border: solid #444 1px;
   text-align: center;
-  width: 40px;
+  min-width: 50px;
+  /* width: 40px; */
   height: 30px;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
@@ -241,12 +166,14 @@ tr td {
   border-radius: 4px;
   transition: background-color 0.2s ease;
 }
-
-.tab-note.selected {
+.tab-note:hover {
+  font-weight: bold;
+}
+/* .tab-note.selected {
   background-color: #ffeb3b;
   border: 1px solid #f44336;
   font-weight: bold;
-}
+} */
 
 /* Harmonica Tabs */
 #harmonicaTabs {
@@ -289,4 +216,56 @@ tr td {
 #harmonicaKey optgroup[label="Ostali"] {
   font-style: italic;
   padding: 10px;
+}
+
+
+
+
+
+/* Panel stil */
+.control-panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.control-panel label {
+  margin-bottom: 6px;
+}
+
+.control-panel .form-select,
+.control-panel .form-control {
+  border-radius: 6px;
+}
+
+/* Custom color picker */
+#customColor {
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+#customColor {
+  width: 40px;       /* da bude mali kvadrat */
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+
+
+.tab-note.selected, #harmonicaTabs span.selected {
+  /* background-color: #ffeb3b; */
+    background-color: #46b92c;
+
+  border: 1px solid #f44336;
+  font-weight: bold;
 }

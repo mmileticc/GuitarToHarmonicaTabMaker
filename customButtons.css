@@ -1,0 +1,59 @@
+:root {
+  --mahogany-main: #4b2e2e;
+  --mahogany-accent: #6b3f3f;
+
+  --maple-main: #d2b48c;
+  --maple-accent: #deb887;
+
+  --ebony-main: #2b2b2b;
+  --ebony-accent: #3d3d3d;
+
+  --custom-main: #4b2e2e; /* default, menja se iz color pickera */
+  --custom-accent: #6b3f3f;
+}
+
+
+.btn-theme {
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-theme:hover {
+  transform: scale(1.05);
+}
+
+/* Mahogany */
+.btn-mahogany {
+  background-color: var(--mahogany-main);
+}
+.btn-mahogany:hover {
+  background-color: var(--mahogany-accent);
+}
+
+/* Maple */
+.btn-maple {
+  background-color: var(--maple-main);
+  color: #222;
+}
+.btn-maple:hover {
+  background-color: var(--maple-accent);
+  color: #000;
+}
+
+/* Ebony */
+.btn-ebony {
+  background-color: var(--ebony-main);
+}
+.btn-ebony:hover {
+  background-color: var(--ebony-accent);
+}
+
+/* Custom */
+.btn-custom {
+  background-color: var(--custom-main);
+}
+.btn-custom:hover {
+  background-color: var(--custom-accent);
+}

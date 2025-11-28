@@ -13,6 +13,10 @@ export class TabManager {
     this.notes = [];            // centralni model tabova
     this.selectedIndex = null;  // koja nota je selektovana
 
+    this.mode = 'editFromFretboard'; // 'append' | 'editFromFretboard' | 'insertAfter'
+    this.editTarget = 'string+fret'; // ili 'fret-only' ako želiš da zadržiš isti string
+
+
     this.listen();
   }
 
@@ -110,35 +114,64 @@ export class TabManager {
     // dodaj klik listenere na note
     this.guitarDiv.querySelectorAll('.tab-note').forEach(el => {
       el.addEventListener('click', () => {
-        // resetuj prethodnu selekciju
-        this.guitarDiv.querySelectorAll('.tab-note.selected').forEach(sel => sel.classList.remove('selected'));
-        let temp = parseInt(el.dataset.pos, 10);
-        if(temp != this.selectedIndex){
-          this.selectedIndex = temp;
-          this.inputBuffer = '';
-          el.classList.add('selected'); // vizuelno označi
-
-        }
-        //this.selectedIndex = parseInt(el.dataset.pos, 10);
+        const pos = parseInt(el.dataset.pos, 10);
+        this.selectNoteByPosition(pos);
       });
     });
     this.refreshHarmonicaTabs();
 
   }
 
-  // sluša događaje sa fretboarda
+  // slusa dogadjaje sa fretboarda
   listen() {
+    
     document.addEventListener('notePressed', e => {
-      // const { string, fret, note } = e.detail;
-
-      // // dodaj novu notu na kraj
-      // this.insertNote(string, fret, this.notes.length);
       const { string, fret, note } = e.detail;
-      this.insertNote(string, fret, this.notes.length, note);
 
-      // osveži harmonika tabove
-      //this.refreshHarmonicaTabs();
+      // Nema selekcije → uvek append
+      if(this.selectedIndex === null){
+        this.insertNote(string, fret, this.notes.length, note);
+        return;
+      }
+      
+      // Uređivanje selektovane note iz fretboarda
+       if (this.mode === 'editFromFretboard') {
+        const pos = this.selectedIndex;
+        const n = this.notes.find(x => x.position === pos);
+        if (!n) return;
+
+        if (this.editTarget === 'string+fret') {
+          n.string = string;
+          n.fret = fret;
+          n.note = note; // pitch direktno iz fretboarda (već izračunat)
+        } else { // 'fret-only'
+          n.fret = fret;
+          // ažuriraj pitch na osnovu originalnog stringa + novog praga
+          const openNote = this.tuning[n.string];
+          const octave = parseInt(openNote.slice(-1), 10);
+          const noteName = openNote.slice(0, -1);
+          const rootIndex = this.fretboard.noteSystem.findIndex(noteName);
+
+          const idx = (rootIndex + fret) % this.fretboard.noteSystem.notes.length;
+          const octaveDiff = Math.floor((rootIndex + fret) / this.fretboard.noteSystem.notes.length);
+          n.note = this.fretboard.noteSystem.notes[idx] + (octave + octaveDiff);
+        }
+
+        this.refresh();
+        return;
+      }
+
+      // Insert posle selektovane note
+      if (this.mode === 'insertAfter') {
+        const pos = this.selectedIndex + 1;
+        this.insertNote(string, fret, pos, note);
+        // opcionalno: pomeri selekciju na novo ubacenu notu
+        this.selectedIndex = pos;
+        return;
+      }
     });
+
+
 
     document.addEventListener('click', e => {
       // proveri da li je kliknut element koji NIJE nota
@@ -148,6 +181,8 @@ export class TabManager {
 
         // ukloni vizuelnu selekciju
         this.guitarDiv.querySelectorAll('.tab-note.selected')
+          .forEach(sel => sel.classList.remove('selected'));
+        this.harmonicaDiv.querySelectorAll('.tab-note.selected')
           .forEach(sel => sel.classList.remove('selected'));
       }
     });
@@ -202,13 +237,47 @@ export class TabManager {
     const playable = harmonicaNotes.findLast(h => h.note === n.note);
 
     const span = document.createElement('span');
+
+    span.classList.add("tab-note");
+    span.dataset.pos = n.position;
+
     if (playable) {
       span.textContent = playable.tab.toString().padStart(3, ' ');
     } else {
       span.textContent = ' no ';
     }
+
+    // klik na harmoniku → selektuj i gitaru
+    span.addEventListener('click', () => {
+      this.selectNoteByPosition(n.position);
+    });
+
+
     this.harmonicaDiv.append(span);
   });
+
+  
+}
+
+
+selectNoteByPosition(pos) {
+  // resetuj selekciju
+  this.guitarDiv.querySelectorAll('.tab-note.selected')
+    .forEach(sel => sel.classList.remove('selected'));
+  this.harmonicaDiv.querySelectorAll('.tab-note.selected')
+    .forEach(sel => sel.classList.remove('selected'));
+
+  const gEl = this.guitarDiv.querySelector(`.tab-note[data-pos="${pos}"]`);
+  const hEl = this.harmonicaDiv.querySelector(`.tab-note[data-pos="${pos}"]`);
+
+  if (gEl) {
+    this.selectedIndex = pos;
+    this.inputBuffer = '';
+    gEl.classList.add('selected');
+  }
+  if (hEl) {
+    hEl.classList.add('selected');
+  }
 }
 
 }

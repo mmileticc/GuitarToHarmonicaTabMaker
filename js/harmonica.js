@@ -54,7 +54,7 @@ export class DiatonicHarmonica {
         // Hole 1
         { tab: "1",  offset: 0 },     // C
         { tab: "-1", offset: 2 },     // D
-        //{ tab: "-1/", offset: 1 },    // Db (bend)
+        // { tab: "-1/", offset: 1 },    // Db (bend)
 
         // Hole 2
         { tab: "2",   offset: 4 },   // E
