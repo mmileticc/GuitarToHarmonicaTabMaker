@@ -1,4 +1,4 @@
-
+/* 
 tr td{
     border: solid black 2px;
     text-align: center;
@@ -42,7 +42,7 @@ tr td{
 }
 
 
-/* copilot dolje */
+/* copilot dolje 
 #harmonicaKey optgroup[label="Najčešći"] {
     font-weight: bold;
     color: black; 
@@ -53,3 +53,240 @@ tr td{
     padding: 20px;
 }
 
+.tab-note.selected {
+  background-color: yellow;
+  border: 1px solid red;
+}
+
+ 
+#harmonicaTabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+  gap: 8px;
+  font-family: monospace;
+}
+#harmonicaTabs span { 
+    display: inline; 
+}
+
+ */
+
+/* ////////////////////////////////// ///////////////////////////////// */
+
+
+
+/* Globalni stil */
+body {
+  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.3rem;
+}
+
+/* Fretboard tabela */
+table {
+  border-collapse: collapse;
+  margin: 10px auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+tr td {
+  border: solid #444 1px;
+  text-align: center;
+  width: 40px;
+  height: 30px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.fretField {
+  /* background-color: #3e3a1f;
+  color: whitesmoke;
+  cursor: pointer; */
+  background-color: #4b2e2e; /* tamno braon, mahagoni */
+  color: #f5f5dc;           /* bež, kao ugravirani markeri */
+  cursor: pointer;
+
+}
+
+.fretField:hover {
+  /* background-color: #5f5624; */
+    background-color: #6b3f3f; /* svetlija braon kad hoveruješ */
+    color: #fff;
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+.disabledNote {
+  /* background-color: #b9b48a;
+  color: #555; */
+   background-color: #a58b6f; /* boja starog drveta */
+  color: #333;
+}
+
+/*  */
+/* Mahagoni */
+.fret-mahogany {
+  background-color: #4b2e2e;
+  color: #f5f5dc;
+}
+.fret-mahogany:hover {
+  background-color: #6b3f3f;
+  color: #fff;
+  font-weight: bold;
+    transform: scale(1.05);
+}
+
+/* Javor */
+.fret-maple {
+  background-color: #d2b48c;
+  color: #222;
+}
+.fret-maple:hover {
+  background-color: #deb887;
+  color: #000;
+  font-weight: bold;
+    transform: scale(1.05);
+}
+
+/* 🎸 Mahogany – tamno crveno drvo */
+.fret-mahogany {
+  background-color: #4b2e2e; /* tamno braon-crvena */
+  color: #f5f5dc;           /* bež, kontrast */
+}
+.fret-mahogany:hover {
+  background-color: #6b3f3f;
+  color: #fff;
+  font-weight: bold;
+    transform: scale(1.05);
+}
+.fret-mahogany-disabled {
+  background-color: #7a4a3a; /* svetlija, prigušena */
+  color: #999;
+}
+
+/* 🎸 Maple – svetlo drvo */
+.fret-maple {
+  background-color: #d2b48c; /* tan/javor */
+  color: #222;
+}
+.fret-maple:hover {
+  background-color: #deb887; /* toplija nijansa */
+  color: #000;
+}
+.fret-maple-disabled {
+  background-color: #c0a080; /* prigušena braon */
+  color: #666;
+}
+
+/* 🎸 Ebony – crni vrat */
+.fret-ebony {
+  background-color: #2b2b2b; /* tamno siva/crna */
+  color: #e0e0e0;
+}
+.fret-ebony:hover {
+  background-color: #3d3d3d;
+  color: #fff;
+}
+.fret-ebony-disabled {
+  background-color: #444; /* tamnija siva */
+  color: #888;
+}
+
+/* Disabled varijante */
+.fret-mahogany-disabled,
+.fret-maple-disabled,
+.fret-ebony-disabled {
+  pointer-events: none;   /* onemogućava klik i hover */
+  cursor: default;        /* nema "ruku" kad pređeš mišem */
+  transition: none;       /* nema animacije */
+}
+
+/*  */
+
+.numeration{
+  border: none;
+
+}
+/* Numeracija pragova */
+.boldNumeration {
+  font-weight: bold;
+  border-top: solid #333 3px;
+  background-color: #f0f0f0;
+}
+
+.zeroFret {
+  border-right: solid #000 6px;
+}
+
+/* Guitar Tabs */
+#guitarTabs {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tab-note {
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.tab-note.selected {
+  background-color: #ffeb3b;
+  border: 1px solid #f44336;
+  font-weight: bold;
+}
+
+/* Harmonica Tabs */
+#harmonicaTabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+  gap: 6px;
+  font-family: monospace;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#harmonicaTabs span {
+  background: #eee;
+  padding: 4px;
+  border-radius: 4px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+#harmonicaTabs span:hover {
+  background: #d6d6d6;
+}
+
+/* Harmonika key picker */
+#harmonicaKey {
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+
+#harmonicaKey optgroup[label="Najčešći"] {
+  font-weight: bold;
+  color: #000;
+}
+
+#harmonicaKey optgroup[label="Ostali"] {
+  font-style: italic;
+  padding: 10px;
+}

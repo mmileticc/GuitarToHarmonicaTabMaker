@@ -19,7 +19,19 @@
 <body class="container">
     <div id="main" class="">
         <div class="row my-3">
-             <div class="col">
+            <div class="col">
+                <label for="fretTheme"><strong>Dizajn vrata:</strong></label>
+                <select id="fretTheme">
+                <option value="mahogany">Mahagoni</option>
+                <option value="maple">Javor</option>
+                <option value="ebony">Ebony</option>
+                <option value="custom">Custom</option>
+                </select>
+
+                <input type="color" id="customColor" value="#4b2e2e" style="display:none;">
+            </div>
+            
+            <div class="col">
                 <span><strong>Preference notnog zapisa:</strong></span>
                 <label for="sharp">Sharp (#)</label>
                 <input type="radio" id="sharp" name="sharpflat" value="sharp" checked>
@@ -27,6 +39,7 @@
                 <label for="flat">Flat (b)</label>
                 <input type="radio" id="flat" name="sharpflat" value="flat">
             </div>
+
             <div class="col">
                 <form id="fretForm">
                     <label for="numOfFrets"><strong>Izaberite broj polja gitare:</strong></label>
@@ -37,26 +50,26 @@
 
             <!-- Harmonika: izbor tonaliteta -->
             <div id="harmonica-key-picker" class="col">
-            <label for="harmonicaKey"><strong>Tonalitet harmonike:</strong></label>
-            <select id="harmonicaKey">
-                <optgroup label="Najčešći">
-                    <option value="C" selected>C</option>
-                    <option value="G">G</option>
-                    <option value="A">A</option>
-                    <option value="D">D</option>
-                    <option value="F">F</option>
-                </optgroup>
-                <optgroup label="Ostali">
-                    <option value="Ab">Ab</option>
-                    <option value="Bb">Bb</option>
-                    <option value="B">B</option>
-                    <option value="Db">Db</option>
-                    <option value="Eb">Eb</option>
-                    <option value="E">E</option>
-                    <option value="F#">F#</option>
-                </optgroup>
+                <label for="harmonicaKey"><strong>Tonalitet harmonike:</strong></label>
+                <select id="harmonicaKey">
+                    <optgroup label="Najčešći">
+                        <option value="C" selected>C</option>
+                        <option value="G">G</option>
+                        <option value="A">A</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </optgroup>
+                    <optgroup label="Ostali">
+                        <option value="Ab">Ab</option>
+                        <option value="Bb">Bb</option>
+                        <option value="B">B</option>
+                        <option value="Db">Db</option>
+                        <option value="Eb">Eb</option>
+                        <option value="E">E</option>
+                        <option value="F#">F#</option>
+                    </optgroup>
 
-            </select>
+                </select>
             </div>
 
         </div>
@@ -79,6 +92,7 @@
 
         
         </div>
+
         
 
         
