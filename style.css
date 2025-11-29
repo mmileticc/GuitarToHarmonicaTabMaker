@@ -27,7 +27,7 @@ tr td {
   border: solid #444 1px;
   text-align: center;
   min-width: 50px;
-  /* width: 40px; */
+  width: 40px;
   height: 30px;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
@@ -158,10 +158,18 @@ tr td {
 #guitarTabs {
   display: flex;
   flex-direction: column;   /* blokovi jedan ispod drugog */
-  gap: 12px;                /* razmak između blokova */
+  gap: 12px;                
   font-family: monospace;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-x: none;
+
+  height: 320px;
+
+  background: #fafafa;  
+  border: 1px solid #ddd;
+  /* padding: 10px; */
+  border-radius: 6px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .measure {
@@ -188,16 +196,30 @@ tr td {
 
 
 /* Harmonica Tabs */
+
 #harmonicaTabs {
+
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+  grid-auto-flow: row;       /* puni po vrstama, s leva na desno */
+  grid-auto-rows: 35px;         /* visina jedne note */
+  grid-template-columns: repeat(auto-fill, 35px); /* napravi redove dok ima mesta */
+  justify-content: center;
   gap: 6px;
+  
+
+
+
   font-family: monospace;
   background: #fafafa;
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 6px;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+
+  overflow-y: scroll;
+  overflow-x: none;
+
+  height: 320px;
 }
 
 #harmonicaTabs span {
@@ -206,6 +228,7 @@ tr td {
   border-radius: 4px;
   text-align: center;
   transition: background-color 0.2s ease;
+  height: 35px;
 }
 
 #harmonicaTabs span:hover {

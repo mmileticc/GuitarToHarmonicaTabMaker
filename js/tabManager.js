@@ -92,13 +92,13 @@ refresh() {
 
   this.guitarDiv.innerHTML = '';
 
-  const container = document.createElement('div');
-  container.id = 'guitarTabs';
+  // const container = document.createElement('div');
+  // container.id = 'guitarTabs';
 
   // širina diva i širina jedne note
   const divWidth = this.guitarDiv.clientWidth;
-  const noteWidth = 32; // 30px + gap
-  let notesPerBlock = Math.max(1, Math.floor(divWidth / noteWidth)) - 2;
+  const noteWidth = 34; // 30px + gap
+  let notesPerBlock = Math.max(1, Math.floor(divWidth / noteWidth)) - 1;
   notesPerBlock = notesPerBlock < 1? 1: notesPerBlock;
 
 
@@ -116,6 +116,7 @@ refresh() {
       // labela otvorene žice
       const label = document.createElement('span');
       label.textContent = openNote.padEnd(4, ' ') + '|';
+      label.style.minWidth = '40px';
       stringRow.append(label);
 
       // note za ovaj blok
@@ -140,10 +141,10 @@ refresh() {
       measure.append(stringRow);
     });
 
-    container.append(measure);
+    this.guitarDiv.append(measure);
   }
 
-  this.guitarDiv.append(container);
+  // this.guitarDiv.append(container);
   this.refreshHarmonicaTabs();
   
   

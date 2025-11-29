@@ -33,82 +33,93 @@
                     <li class="nav-item"><a class="nav-link" href="#">Tabs</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Harmonica</a></li>
                 </ul> -->
+                 <button class="btn btn-secondary mb-2 navbar-nav ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#settingsPanel">
+                ⚙️ Podešavanja
+                </button>
                 </div>
             </div>
         </nav>
         <!-- iznad nav -->
 
         <div class="mx-3">
-            <div class="row my-3 g-3 control-panel">
-                <div class="col-md-3">
-                    <label for="fretTheme"><strong>Dizajn vrata:</strong></label>
-                    <select id="fretTheme" class="form-select">
-                        <option value="mahogany">Mahagoni</option>
-                        <option value="maple">Javor</option>
-                        <option value="ebony">Ebony</option>
-                        <option value="custom">Custom</option>
-                    </select>
 
-                    <input type="color" id="customColor" value="#4b2e2e" style="display:none;">
-                </div>
+            <div id="settings">
+                
 
-                <div class="col-md-3">
-                    <span class="fw-bold">🎼 Preference notnog zapisa</span>
-                    <div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="sharp" name="sharpflat" value="sharp" checked>
-                            <label class="form-check-label" for="sharp">Sharp (#)</label>
+                <div id="settingsPanel" class="collapse">
+
+                    <div class="row my-3 g-3 control-panel">
+                        <div class="col-md-3">
+                            <label for="fretTheme"><strong>Dizajn vrata:</strong></label>
+                            <select id="fretTheme" class="form-select">
+                                <option value="mahogany">Mahagoni</option>
+                                <option value="maple">Javor</option>
+                                <option value="ebony">Ebony</option>
+                                <option value="custom">Custom</option>
+                            </select>
+
+                            <input type="color" id="customColor" value="#4b2e2e" style="display:none;">
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="flat" name="sharpflat" value="flat">
-                            <label class="form-check-label" for="flat">Flat (b)</label>
-                        </div>
-                    </div>                        
-                </div>
 
-                <div class="col-md-3">
-                    <form id="fretForm">
-                    <label for="numOfFrets" class="form-label fw-bold">🎸 Broj polja gitare</label>
-                    <div class="input-group">
-                        <input type="number" name="numOfFrets" id="numOfFrets" min="12" max="30" required value="18" class="form-control">
-                        <button type="submit" id="fretButton" class="btn btn-theme btn-mahogany">Primeni</button>
+                        <div class="col-md-3">
+                            <span class="fw-bold">🎼 Preference notnog zapisa</span>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="sharp" name="sharpflat" value="sharp" checked>
+                                    <label class="form-check-label" for="sharp">Sharp (#)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="flat" name="sharpflat" value="flat">
+                                    <label class="form-check-label" for="flat">Flat (b)</label>
+                                </div>
+                            </div>                        
+                        </div>
+
+                        <div class="col-md-3">
+                            <form id="fretForm">
+                            <label for="numOfFrets" class="form-label fw-bold">🎸 Broj polja gitare</label>
+                            <div class="input-group">
+                                <input type="number" name="numOfFrets" id="numOfFrets" min="12" max="30" required value="18" class="form-control">
+                                <button type="submit" id="fretButton" class="btn btn-theme btn-mahogany">Primeni</button>
+                            </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="harmonicaKey" class="form-label fw-bold">🎶 Tonalitet harmonike</label>
+                            <select id="harmonicaKey" class="form-select">
+                            <optgroup label="Najčešći">
+                                <option value="C" selected>C</option>
+                                <option value="G">G</option>
+                                <option value="A">A</option>
+                                <option value="D">D</option>
+                                <option value="F">F</option>
+                            </optgroup>
+                            <optgroup label="Ostali">
+                                <option value="Ab">Ab</option>
+                                <option value="Bb">Bb</option>
+                                <option value="B">B</option>
+                                <option value="Db">Db</option>
+                                <option value="Eb">Eb</option>
+                                <option value="E">E</option>
+                                <option value="F#">F#</option>
+                            </optgroup>
+                            </select>
+                        </div>
                     </div>
-                    </form>
                 </div>
-
-                <div class="col-md-3">
-                    <label for="harmonicaKey" class="form-label fw-bold">🎶 Tonalitet harmonike</label>
-                    <select id="harmonicaKey" class="form-select">
-                    <optgroup label="Najčešći">
-                        <option value="C" selected>C</option>
-                        <option value="G">G</option>
-                        <option value="A">A</option>
-                        <option value="D">D</option>
-                        <option value="F">F</option>
-                    </optgroup>
-                    <optgroup label="Ostali">
-                        <option value="Ab">Ab</option>
-                        <option value="Bb">Bb</option>
-                        <option value="B">B</option>
-                        <option value="Db">Db</option>
-                        <option value="Eb">Eb</option>
-                        <option value="E">E</option>
-                        <option value="F#">F#</option>
-                    </optgroup>
-                    </select>
-                </div>
-            </div>
-            
-       
         
-            <h2>Fretboard</h2>
+            </div>
+           
+        
+            <h3>Fretboard</h3>
             <div id="fretboard" class="row overflow-auto "></div>
         
 
             <div class="row">
-                <div class="col-lg-8">
-                    <h2>GuitarTabs</h2>
-                    <div id="guitarTabs" class="row m-3"></div>
+                <div class="col-lg-9">
+                    <h3>GuitarTabs</h3>
+                    <div id="guitarTabs" class="m-3"></div>
 
                     <div id="tabControls" class="my-3 d-flex gap-2 align-items-center">
                         <button id="btnToggleMode" class="btn btn-theme btn-mahogany">
@@ -144,8 +155,8 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
-                    <h2>HarmonicaTabs</h2>
+                <div class="col-lg-3" id="harDiv">
+                    <h3>HarmonicaTabs</h3>
                     <div id="harmonicaTabs" class="row m-3"></div>
                 </div>
 

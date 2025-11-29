@@ -23,6 +23,7 @@ class AppController {
 
     this.initListeners();
     this.fretboard.render();
+    this.tabs.refresh();
   }
 
   initListeners() {
