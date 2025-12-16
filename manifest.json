@@ -1,0 +1,33 @@
+{
+  "name": "GotH - Guitar to Harmonica Transposer",
+  "short_name": "GotH",
+  "description": "Convert guitar tablature to harmonica tabs online. Free tool for musicians.",
+  "start_url": "/GuitarToHarmonicaTabMaker/",
+  "scope": "/GuitarToHarmonicaTabMaker/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a1a1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/GuitarToHarmonicaTabMaker/img/icon.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/GuitarToHarmonicaTabMaker/img/icon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["music", "education", "productivity"],
+  "screenshots": [
+    {
+      "src": "/GuitarToHarmonicaTabMaker/img/icon.jpg",
+      "sizes": "540x720",
+      "type": "image/jpeg"
+    }
+  ]
+}
