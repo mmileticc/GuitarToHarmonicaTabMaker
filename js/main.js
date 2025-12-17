@@ -85,6 +85,27 @@ class AppController {
       document.documentElement.style.setProperty('--custom-accent', lightenColor(e.target.value, 0.3));
     });
 
+    // advanced mode toggle (bends / overblows)
+    const advToggle = document.getElementById('advancedModeToggle');
+    if (advToggle) {
+      // initialize from localStorage if present
+      const saved = localStorage.getItem('goth_advanced') === '1';
+      advToggle.checked = saved;
+      this.harmonica.setAdvancedMode(saved);
+
+      advToggle.addEventListener('change', e => {
+        const enabled = !!e.target.checked;
+        localStorage.setItem('goth_advanced', enabled ? '1' : '0');
+        this.harmonica.setAdvancedMode(enabled);
+        // refresh UI
+        this.fretboard.render();
+        this.tabs.refresh();
+      });
+    }
+
+    // when harmonica advanced mode changes elsewhere, refresh tabs
+    document.addEventListener('harmonicaAdvancedChange', () => this.tabs.refresh());
+
 
 
 
@@ -95,11 +116,11 @@ class AppController {
     btnToggleMode.addEventListener('click', () => {
       if (this.tabs.mode === 'editFromFretboard') {
         this.tabs.mode = 'insertAfter';
-        btnToggleMode.textContent = '➕ Mode: Insert After';
+        btnToggleMode.textContent = 'Mode: Insert After';
         
       } else {
         this.tabs.mode = 'editFromFretboard';
-        btnToggleMode.textContent = '✏️ Mode: Edit Selected';
+        btnToggleMode.textContent = 'Mode: Edit Selected';
        
       }
     });

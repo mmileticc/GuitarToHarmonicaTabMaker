@@ -46,6 +46,9 @@ export class DiatonicHarmonica {
     this.key = key;
     this.rootMidi = ROOT_MIDI[key];
 
+    // Advanced mode flag: when true, additional notes (bends, overblows) become playable
+    this.advanced = false;
+
 
     // Standardni raspored diatonske harmonike (Richter)
     // Svaki element: { tab, semitoneOffset }
@@ -54,24 +57,24 @@ export class DiatonicHarmonica {
         // Hole 1
         { tab: "1",  offset: 0 },     // C
         { tab: "-1", offset: 2 },     // D
-        // { tab: "-1/", offset: 1 },    // Db (bend)
+        { tab: "-1/", offset: 1, advanced: true, type: 'bend' },    // Db (bend)
 
         // Hole 2
         { tab: "2",   offset: 4 },   // E
         { tab: "-2",  offset: 7 },   // G
-        //{ tab: "-2/", offset: 6 },   // F# (1/2 step bend)
-        //{ tab: "-2//",offset: 5 },   // F (1 step bend)
+        { tab: "-2/", offset: 6, advanced: true, type: 'bend' },   // F# (1/2 step bend)
+        { tab: "-2//",offset: 5, advanced: true, type: 'bend' },   // F (1 step bend)
 
         // Hole 3
         { tab: "3",   offset: 7 },   // G
         { tab: "-3",  offset: 11 },  // B
-        //{ tab: "-3/", offset: 10 },  // Bb (1/2 step bend)
-        //{ tab: "-3//",offset: 9 },   // A  (1 step bend)
+        { tab: "-3/", offset: 10, advanced: true, type: 'bend' },  // Bb (1/2 step bend)
+        { tab: "-3//",offset: 9, advanced: true, type: 'bend' },   // A  (1 step bend)
 
         // Hole 4
         { tab: "4",  offset: 12 },  // C
         { tab: "-4", offset: 14 },  // D
-        //{ tab: "-4/", offset: 13 },  // Db
+        { tab: "-4/", offset: 13, advanced: true, type: 'bend' },  // Db
 
         // Hole 5
         { tab: "5",  offset: 16 },  // E
@@ -80,7 +83,7 @@ export class DiatonicHarmonica {
         // Hole 6
         { tab: "6",   offset: 19 }, // G
         { tab: "-6",  offset: 21 }, // A
-        //{ tab: "-6/",  offset: 20 }, // G# (1/2 step bend)
+        { tab: "-6/",  offset: 20, advanced: true, type: 'bend' }, // G# (1/2 step bend)
 
         // Hole 7
         { tab: "7",  offset: 24 },  // C
@@ -97,8 +100,8 @@ export class DiatonicHarmonica {
         // Hole 10
         { tab: "10",   offset: 36 }, // C
         { tab: "-10",  offset: 33 }, // A
-        //{ tab: "-10/", offset: 32 }, // G# (bend)
-        //{ tab: "-10//",offset: 31 }  // G (deep bend)
+        { tab: "-10/", offset: 32, advanced: true, type: 'bend' }, // G# (bend)
+        { tab: "-10//",offset: 31, advanced: true, type: 'bend' }  // G (deep bend)
         ];
     }
     
@@ -112,10 +115,13 @@ export class DiatonicHarmonica {
 
     /** Vraca listu objekata { note, tab } za trenutni kljuc harmonike */
     getPlayableNotes() {
-        return this.layout.map(entry => {
-            const absolute = this.rootMidi + entry.offset;
-            const note = this.semitoneToNoteWithOctave(absolute);
-            return { note, tab: entry.tab };
+      // Include advanced entries only when enabled
+      return this.layout
+        .filter(entry => !entry.advanced || (entry.advanced && this.advanced))
+        .map(entry => {
+          const absolute = this.rootMidi + entry.offset;
+          const note = this.semitoneToNoteWithOctave(absolute);
+          return { note, tab: entry.tab, advanced: !!entry.advanced, type: entry.type || null };
         });
     }
 
@@ -124,6 +130,13 @@ export class DiatonicHarmonica {
         this.key = newKey;
         this.rootMidi = ROOT_MIDI[newKey];
 
+    }
+
+    /** Enable or disable advanced mode (bends / overblows). Dispatches event. */
+    setAdvancedMode(enabled) {
+      this.advanced = !!enabled;
+      // notify others so UI can update (fretboard, etc.)
+      document.dispatchEvent(new CustomEvent('harmonicaAdvancedChange', { detail: { advanced: this.advanced } }));
     }
 
 }

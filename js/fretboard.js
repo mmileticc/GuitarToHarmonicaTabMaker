@@ -11,6 +11,9 @@ export class Fretboard {
     this.theme = 'mahogany'; // default
     this.customColor = '#4b2e2e';
 
+    // Listen for harmonica advanced mode changes so we can re-render
+    document.addEventListener('harmonicaAdvancedChange', () => this.render());
+
   }
 
   setTheme(theme, customColor = null) {
@@ -68,6 +71,10 @@ export class Fretboard {
       if (playable) {
         cell.addEventListener('click', () => this.noteClick(stringIndex, fret, searchNote));
         cell.classList.add("fretField");
+        if (playable.advanced) {
+          // visually mark advanced-playable notes with a different shade
+          cell.classList.add('advancedNote');
+        }
       } else {
         if (this.theme === 'custom') {
             // disabled → bledja nijansa
