@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GotH Editor - Pretvarač tablatura</title>
+
+    <meta name="description" content="GotH Editor - Radi sa gitarskim i harmonika tabovama u realnom vremenu.">
+    <meta name="author" content="Milinko Miletic">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon & PWA -->
+    <link rel="icon" type="image/x-icon" href="https://mmileticc.github.io/GotH/img/favicon.ico">
+    <link rel="apple-touch-icon" href="https://mmileticc.github.io/GotH/img/icon-192.png">
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="customButtons.css">
+
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+    <script type="module" src="js/main.js" defer></script>
+    <script src="js/i18n.js" defer></script>
+
+</head>
+<body class="container-fluid">
+    <div id="main" class="">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./img/icon-192.png" alt="GotH logo" width="36" height="36" class="d-inline-block align-text-top me-2">
+                    <span data-i18n="nav_brand">GotH</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                        aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="d-flex align-items-center flex-column flex-lg-row gap-2 gap-lg-0 w-100 ms-lg-auto">
+                    <a href="index.html" class="btn btn-outline-light me-2" data-i18n="back_btn">← Nazad</a>
+                    <div class="btn-group me-lg-2 w-100 w-lg-auto">
+                        <button id="langBtn" type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">EN</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item lang-select" href="#" data-lang="en">English</a></li>
+                            <li><a class="dropdown-item lang-select" href="#" data-lang="sr">Srpski</a></li>
+                        </ul>
+                    </div>
+                    <button id="settingsToggle" class="btn btn-outline-light w-100 w-lg-auto" type="button" data-bs-toggle="collapse" data-bs-target="#settingsPanel">⚙️</button>
+                </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="mx-3">
+
+            <div id="editor">
+
+                <div id="settings">
+                    
+                    <div id="settingsPanel" class="collapse">
+
+                        <div class="row my-3 g-3 control-panel">
+
+                            <div id="guitarSettings" class="col-md-9">
+                                <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="fretTheme"><strong data-i18n="settings_design_label">Dizajn vrata:</strong></label>
+                                    <select id="fretTheme" class="form-select">
+                                        <option value="mahogany" data-i18n="opt_mahogany">Mahagoni</option>
+                                        <option value="maple" data-i18n="opt_maple">Javor</option>
+                                        <option value="ebony" data-i18n="opt_ebony">Ebony</option>
+                                        <option value="custom" data-i18n="opt_custom">Custom</option>
+                                    </select>
+
+                                    <input type="color" id="customColor" value="#4b2e2e" style="display:none;">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <span class="fw-bold" data-i18n="preference_label">Preference notnog zapisa</span>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="sharp" name="sharpflat" value="sharp" checked>
+                                            <label class="form-check-label" for="sharp" data-i18n="sharp_label">Sharp (#)</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="flat" name="sharpflat" value="flat">
+                                            <label class="form-check-label" for="flat" data-i18n="flat_label">Flat (b)</label>
+                                        </div>
+                                    </div>                        
+                                </div>
+
+                                <div class="col-md-4">
+                                    <form id="fretForm">
+                                    <label for="numOfFrets" class="form-label fw-bold" data-i18n="num_of_frets_label">Broj polja gitare</label>
+                                    <div class="input-group">
+                                        <input type="number" name="numOfFrets" id="numOfFrets" min="12" max="30" required value="18" class="form-control">
+                                        <button type="submit" id="fretButton" class="btn btn-theme btn-mahogany" data-i18n="apply_button">Primeni</button>
+                                    </div>
+                                    </form>
+                                </div>
+                                </div>
+
+                            </div>
+                            
+                            <div id="harmonicaSettings" class="col-md-3">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="harmonicaKey" class="form-label fw-bold" data-i18n="harmonica_key_label">Tonalitet harmonike</label>
+                                        <select id="harmonicaKey" class="form-select">
+                                        <optgroup label="Najčešći">
+                                            <option value="C" selected>C</option>
+                                            <option value="G">G</option>
+                                            <option value="A">A</option>
+                                            <option value="D">D</option>
+                                            <option value="F">F</option>
+                                        </optgroup>
+                                        <optgroup label="Ostali">
+                                            <option value="Ab">Ab</option>
+                                            <option value="Bb">Bb</option>
+                                            <option value="B">B</option>
+                                            <option value="Db">Db</option>
+                                            <option value="Eb">Eb</option>
+                                            <option value="E">E</option>
+                                            <option value="F#">F#</option>
+                                        </optgroup>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="advancedModeToggle">
+                                            <label class="form-check-label" for="advancedModeToggle" data-i18n="advanced_mode">Omogući napredne note (bendovi/overblow)</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+
+
+                <h3 data-i18n="fretboard_h3">Fretboard</h3>
+                <div id="fretboard" class="row overflow-auto "></div>
+            
+
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h3 data-i18n="guitartabs_h3">GuitarTabs</h3>
+                        <div id="guitarTabs" class="m-3"></div>
+
+                        <div id="tabControls" class="my-3 d-flex gap-2 align-items-center">
+                            <button id="btnToggleMode" class="btn btn-theme btn-mahogany" data-i18n="mode_button">
+                            Mode: Edit Selected
+                            </button>
+
+                            <button id="btnDelete" class="btn btn-theme btn-mahogany" data-i18n="delete_button">
+                            Obriši selektovanu
+                            </button>
+
+                            <button id="btnClear" class="btn btn-theme btn-mahogany" data-bs-toggle="modal" data-bs-target="#clearModal" data-i18n="clear_button">
+                            Očisti sve
+                            </button>
+                        </div>
+
+                        <!-- Modal potvrde -->
+                        <div class="modal fade" id="clearModal" tabindex="-1" aria-labelledby="clearModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="clearModalLabel" data-i18n="clear_modal_title">Potvrda brisanja</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <span data-i18n="clear_modal_body">Da li ste sigurni da želite da obrišete celu tablaturu?</span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="modal_cancel">Odustani</button>
+                                    <button type="button" class="btn btn-danger" id="confirmClear" data-i18n="confirm_clear_button">Obriši sve</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3" id="harDiv">
+                        <h3 data-i18n="harmonicatabs_h3">HarmonicaTabs</h3>
+                        <div id="harmonicaTabs" class="row m-3"></div>
+                    </div>
+
+                
+                </div>
+                <div class="save">
+                    <!-- Dugme -->
+                    <button id="btnSaveText" class="btn btn-theme btn-mahogany" data-i18n="save_button_text">
+                    Sačuvaj kao tekst
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="saveModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" data-i18n="save_modal_title">Izaberi šta želiš da sačuvaš</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p data-i18n="save_modal_p">Odaberi tip eksportovane tablature:</p>
+                            <button id="btnSaveGuitar" class="btn btn-primary" data-i18n="save_guitar_button">Gitara + Harmonika</button>
+                            <button id="btnSaveHarmonica" class="btn btn-secondary" data-i18n="save_harmonica_button">Samo Harmonika</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        
+        <!-- footer -->
+         <footer class="text-center mt-4 py-3 border-top">
+            <small data-i18n="footer_text">© 2025 GotH - Milinko | v1.0</small>
+        </footer>
+    </div>
+</body>
+</html>

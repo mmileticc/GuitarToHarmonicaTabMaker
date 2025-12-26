@@ -142,4 +142,7 @@ class AppController {
 }
 
 // Start aplikacije
-new AppController();
+// Initialize AppController only if the necessary DOM elements exist (on editor pages)
+if (document.getElementById("fretboard") && document.getElementById("guitarTabs")) {
+  new AppController();
+}
