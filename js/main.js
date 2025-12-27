@@ -109,20 +109,27 @@ class AppController {
 
 
 
-    const btnToggleMode = document.getElementById('btnToggleMode');
+  
     const btnDelete = document.getElementById('btnDelete');
     const btnClearConfirm = document.getElementById('confirmClear');
 
-    btnToggleMode.addEventListener('click', () => {
-      if (this.tabs.mode === 'editFromFretboard') {
+    const modeSwitch = document.getElementById('modeSwitch');
+    const modeLabel = document.getElementById('modeLabel');
+
+   const lang1 = localStorage.getItem('goth_lang') || 'sr';
+
+    modeSwitch.addEventListener('change', () => {
+      if (modeSwitch.checked) {
         this.tabs.mode = 'insertAfter';
-        btnToggleMode.textContent = 'Mode: Insert After';
-        
+        modeLabel.removeAttribute('data-i18n');
+        modeLabel.setAttribute('data-i18n', 'mode_insert');
       } else {
         this.tabs.mode = 'editFromFretboard';
-        btnToggleMode.textContent = 'Mode: Edit Selected';
-       
+        modeLabel.removeAttribute('data-i18n');
+        modeLabel.setAttribute('data-i18n', 'mode_edit');
       }
+      I18N.setChosen(localStorage.getItem('goth_lang') || 'en');
+
     });
 
     

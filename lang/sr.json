@@ -61,5 +61,17 @@
   "save_harmonica_button": "Samo Harmonika",
   "footer_text": "© 2025 GotH - Milinko | v1.0",
   "advanced_mode": "Omogući napredne note (bendovi / overblow) ★",
-  "back_btn": "← Nazad"
+  "back_btn": "← Nazad",
+  "legend_modal_title": "Legenda za tablature",
+  "legend_blow": "+4 → duvanje u rupu broj 4",
+  "legend_draw": "-4 → uvlačenje vazduha u rupu broj 4",
+  "legend_draw_bend_half": "-4/ → uvlačenje sa bendom (½ stepen) u rupu broj 4",
+  "legend_draw_bend_full": "-3// → uvlačenje sa bendom (1 stepen) u rupu broj 3",
+  "legend_draw_bend_onehalf": "-3/// → uvlačenje sa bendom (1.5 stepen) u rupu broj 3",
+  "legend_blow_bend_half": "+8/ → duvanje sa bendom (½ stepen) u rupu broj 8",
+  "legend_blow_bend_full": "+10// → duvanje sa bendom (1 stepen) u rupu broj 10",
+  "legend_overblow": "4* → overblow u rupu broj 4",
+  "legend_overdraw": "-7* → overdraw u rupu broj 7",
+  "mode_insert": "Ubaci posle",
+  "mode_edit": "Uredi izabrano"
 }

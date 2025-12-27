@@ -61,5 +61,17 @@
   "save_harmonica_button": "Harmonica only",
   "footer_text": "© 2025 GotH - Milinko | v1.0",
   "advanced_mode": "Enable advanced notes (bends / overblows) ★",
-  "back_btn": "← Back"
+  "back_btn": "← Back",
+  "legend_modal_title": "Tablature Legend",
+  "legend_blow": "+4 → blow into hole 4",
+  "legend_draw": "-4 → draw (inhale) into hole 4",
+  "legend_draw_bend_half": "-4/ → draw bend (½ step) on hole 4",
+  "legend_draw_bend_full": "-3// → draw bend (1 step) on hole 3",
+  "legend_draw_bend_onehalf": "-3/// → draw bend (1.5 steps) on hole 3",
+  "legend_blow_bend_half": "+8/ → blow bend (½ step) on hole 8",
+  "legend_blow_bend_full": "+10// → blow bend (1 step) on hole 10",
+  "legend_overblow": "4* → overblow on hole 4",
+  "legend_overdraw": "-7* → overdraw on hole 7",
+  "mode_insert": "Insert After",
+  "mode_edit": "Edit Selected"
 }

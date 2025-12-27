@@ -159,9 +159,14 @@
                         <div id="guitarTabs" class="m-3"></div>
 
                         <div id="tabControls" class="my-3 d-flex gap-2 align-items-center">
-                            <button id="btnToggleMode" class="btn btn-theme btn-mahogany" data-i18n="mode_button">
-                            Mode: Edit Selected
+                            <button id="btnToggleMode" class="btn btn-theme btn-mahogany" >
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="modeSwitch">
+                                <label class="form-check-label" for="modeSwitch" id="modeLabel"> Edit Selected</label>
+                            </div>
                             </button>
+                            
+                            
 
                             <button id="btnDelete" class="btn btn-theme btn-mahogany" data-i18n="delete_button">
                             Obriši selektovanu
@@ -193,9 +198,39 @@
                     </div>
 
                     <div class="col-lg-3" id="harDiv">
-                        <h3 data-i18n="harmonicatabs_h3">HarmonicaTabs</h3>
-                        <div id="harmonicaTabs" class="row m-3"></div>
+                        <div class="row">
+                            <h3 data-i18n="harmonicatabs_h3" class="col-10">HarmonicaTabs</h3>
+                            <button type="button" class="btn col-2" data-bs-toggle="modal" data-bs-target="#helpModal">?</button>
+                            
+                        </div>
+                      <div id="harmonicaTabs" class="row m-3"></div>
                     </div>
+                    
+                    <!-- Modal za legendu -->
+                    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="helpModalLabel" data-i18n="legend_modal_title">Legenda za tablature</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                        <li data-i18n="legend_blow">+4 → duvanje u rupu broj 4</li>
+                                        <li data-i18n="legend_draw">-4 → uvlačenje vazduha u rupu broj 4</li>
+                                        <li data-i18n="legend_draw_bend_half">-4/ → uvlačenje sa bendom (½ stepen) u rupu broj 4</li>
+                                        <li data-i18n="legend_draw_bend_full">-3// → uvlačenje sa bendom (1 stepen) u rupu broj 3</li>
+                                        <li data-i18n="legend_draw_bend_onehalf">-3/// → uvlačenje sa bendom (1.5 stepen) u rupu broj 3</li>
+                                        <li data-i18n="legend_blow_bend_half">+8/ → duvanje sa bendom (½ stepen) u rupu broj 8</li>
+                                        <li data-i18n="legend_blow_bend_full">+10// → duvanje sa bendom (1 stepen) u rupu broj 10</li>
+                                        <li data-i18n="legend_overblow">4* → overblow u rupu broj 4</li>
+                                        <li data-i18n="legend_overdraw">-7* → overdraw u rupu broj 7</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                 
                 </div>
