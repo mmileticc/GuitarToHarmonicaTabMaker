@@ -45,7 +45,7 @@ export class TabManager {
     if (note) {
       note.fret = newFret;
 
-      // ➕ izračunaj novi pitch
+      // izračunaj novi pitch
       const openNote = this.tuning[note.string]; // npr. "E4"
       const octave = parseInt(openNote.slice(-1), 10);
       const noteName = openNote.slice(0, -1);
@@ -294,7 +294,7 @@ refresh() {
     span.dataset.pos = n.position;
 
     if (playable) {
-      span.textContent = playable.tab.toString().padStart(3, ' ');
+      span.textContent = playable.tab.toString().padStart(6, ' ');
     } else {
       span.textContent = ' no ';
     }

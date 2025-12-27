@@ -57,51 +57,66 @@ export class DiatonicHarmonica {
         // Hole 1
         { tab: "1",  offset: 0 },     // C
         { tab: "-1", offset: 2 },     // D
-        { tab: "-1/", offset: 1, advanced: true, type: 'bend' },    // Db (bend)
+        { tab: "-1/", offset: 1, advanced: true, type: 'bend' },    // Db (1/2 step draw bend)
+        { tab: "1*", offset: 3 , advanced: true, type: 'overblow'},     // Eb (overblow)
 
         // Hole 2
         { tab: "2",   offset: 4 },   // E
         { tab: "-2",  offset: 7 },   // G
-        { tab: "-2/", offset: 6, advanced: true, type: 'bend' },   // F# (1/2 step bend)
-        { tab: "-2//",offset: 5, advanced: true, type: 'bend' },   // F (1 step bend)
+        { tab: "-2/", offset: 6, advanced: true, type: 'bend' },   // F# (1/2 step draw bend)
+        { tab: "-2//",offset: 5, advanced: true, type: 'bend' },   // F (1 step draw bend)
 
         // Hole 3
         { tab: "3",   offset: 7 },   // G
         { tab: "-3",  offset: 11 },  // B
-        { tab: "-3/", offset: 10, advanced: true, type: 'bend' },  // Bb (1/2 step bend)
-        { tab: "-3//",offset: 9, advanced: true, type: 'bend' },   // A  (1 step bend)
+        { tab: "-3/", offset: 10, advanced: true, type: 'bend' },  // Bb (1/2 step draw bend)
+        { tab: "-3//", offset: 9, advanced: true, type: 'bend' },   // A  (1 step draw bend)
+        { tab: "-3///", offset: 8, advanced: true, type: 'bend' },   // Ab  (1.5 step draw bend)
+
 
         // Hole 4
         { tab: "4",  offset: 12 },  // C
         { tab: "-4", offset: 14 },  // D
-        { tab: "-4/", offset: 13, advanced: true, type: 'bend' },  // Db
+        { tab: "-4/", offset: 13, advanced: true, type: 'bend' },  // Db (1/2 step draw bend)
+        { tab: "4*", offset: 15 , advanced: true, type: 'overblow'},     // Eb (overblow)
 
         // Hole 5
         { tab: "5",  offset: 16 },  // E
         { tab: "-5", offset: 17 },  // F
+        { tab: "5*", offset: 18 , advanced: true, type: 'overblow'},     // Eb (overblow)
 
         // Hole 6
         { tab: "6",   offset: 19 }, // G
         { tab: "-6",  offset: 21 }, // A
-        { tab: "-6/",  offset: 20, advanced: true, type: 'bend' }, // G# (1/2 step bend)
+        { tab: "-6/",  offset: 20, advanced: true, type: 'bend' }, // G# (1/2 step draw bend)
+        { tab: "6*", offset: 22 , advanced: true, type: 'overblow'},     // Bb (overblow)
 
         // Hole 7
         { tab: "7",  offset: 24 },  // C
         { tab: "-7", offset: 23 },  // B
+        { tab: "-7*", offset: 25 , advanced: true, type: 'overdraw'},     // Bb (overdraw)
+
 
         // Hole 8
         { tab: "8",  offset: 28 },  // E
+        { tab: "+8/", offset: 27, advanced: true, type: 'bend' },  // Eb (1/2 step blow bend)
         { tab: "-8", offset: 26 },  // D
+
 
         // Hole 9
         { tab: "9",  offset: 31 },  // G
+        { tab: "+9/",  offset: 30, advanced: true, type: 'bend' },  // G (1/2 step blow bend)
         { tab: "-9", offset: 29 },  // F 
+        { tab: "-9*", offset: 32 , advanced: true, type: 'overdraw'},     // Ab (overdraw)
+
 
         // Hole 10
         { tab: "10",   offset: 36 }, // C
+        { tab: "+10/",   offset: 35, advanced: true, type: 'bend' }, // B (1/2 step blow bend)
+        { tab: "+10//",   offset: 34, advanced: true, type: 'bend' }, // Bb (1 step blow bend)
         { tab: "-10",  offset: 33 }, // A
-        { tab: "-10/", offset: 32, advanced: true, type: 'bend' }, // G# (bend)
-        { tab: "-10//",offset: 31, advanced: true, type: 'bend' }  // G (deep bend)
+        { tab: "-10*", offset: 37 , advanced: true, type: 'overdraw'},     // C# (overdraw)
+
         ];
     }
     

@@ -218,9 +218,9 @@ tr td {
   display: grid;
   grid-auto-flow: row;       /* puni po vrstama, s leva na desno */
   grid-auto-rows: 35px;         /* visina jedne note */
-  grid-template-columns: repeat(auto-fill, 35px); /* napravi redove dok ima mesta */
+  grid-template-columns: repeat(auto-fill, 50px); /* napravi redove dok ima mesta */
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
   
 
 
